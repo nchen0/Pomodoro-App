@@ -6,7 +6,7 @@ export default class App extends React.Component {
     super();
     this.state = {
       seconds: 0,
-      minutes: 0
+      minutes: 25
     };
   }
 
@@ -15,14 +15,14 @@ export default class App extends React.Component {
   }
 
   inc = () => {
-    if (this.state.seconds === 59) {
+    if (this.state.seconds === 0) {
       this.setState(prevState => ({
-        seconds: 0,
-        minutes: prevState.minutes + 1
+        seconds: 59,
+        minutes: prevState.minutes - 1
       }));
     } else {
       this.setState(prevState => ({
-        seconds: prevState.seconds + 1
+        seconds: prevState.seconds - 1
       }));
     }
   };
