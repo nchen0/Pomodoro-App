@@ -7,7 +7,8 @@ export default class App extends React.Component {
     this.state = {
       seconds: 15,
       minutes: 0,
-      start: false
+      start: false,
+      working: true
     };
   }
 
@@ -21,12 +22,12 @@ export default class App extends React.Component {
     }, 1000);*/
   }
 
-  //inc = () => {
-  /*if (this.state.seconds === 1 && this.state.minutes === 0) {
+  inc = () => {
+    /*if (this.state.seconds === 1 && this.state.minutes === 0) {
       clearInterval(this.intervalId);
       alert("Time's up!");
     }*/
-  /*if (this.state.seconds === 0) {
+    if (this.state.seconds === 0) {
       this.setState(prevState => ({
         seconds: 59,
         minutes: prevState.minutes - 1
@@ -36,7 +37,7 @@ export default class App extends React.Component {
         seconds: prevState.seconds - 1
       }));
     }
-};*/
+  };
 
   handleStop = () => {
     this.setState({ start: !this.state.start });
@@ -47,7 +48,24 @@ export default class App extends React.Component {
     this.setState({ start: !this.state.start });
     this.intervalId = setInterval(() => {
       if (this.state.seconds === 0 && this.state.minutes === 0) {
-        clearInterval(this.interval);
+        if (this.state.working === true) {
+          alert("Session done, break time!");
+          this.setState({
+            start: !this.state.start,
+            minutes: 5,
+            seconds: 0,
+            working: !this.state.working
+          });
+          clearInterval(this.intervalId);
+        } else {
+          alert("Break done, study time!");
+          this.setState({
+            start: !this.state.start,
+            minutes: 25,
+            seconds: 0,
+            working: !this.state.working
+          });
+        }
       } else {
         this.inc();
       }
