@@ -1,12 +1,12 @@
 import React from "react";
-import { StyleSheet, Text, View, Vibration, Button } from "react-native";
+import { TouchableOpacity, StyleSheet, Text, View, Vibration, Button } from "react-native";
 
 export default class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      seconds: 15,
-      minutes: 0,
+      seconds: 0,
+      minutes: 25,
       start: false,
       working: true
     };
@@ -80,9 +80,17 @@ export default class App extends React.Component {
           {this.state.seconds < 10 ? "0" + this.state.seconds : this.state.seconds}
         </Text>
         {this.state.start ? (
-          <Button onPress={this.handleStop} title="Stop" />
+          <View style={buttonsContainer}>
+            <TouchableOpacity style={button} onPress={this.handleStop}>
+              <Text style={buttonText}>Stop</Text>
+            </TouchableOpacity>
+          </View>
         ) : (
-          <Button onPress={this.handleStart} title="Start" />
+          <View style={buttonsContainer}>
+            <TouchableOpacity style={button} onPress={this.handleStart}>
+              <Text style={buttonText}>Start</Text>
+            </TouchableOpacity>
+          </View>
         )}
       </View>
     );
@@ -92,13 +100,34 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#2FABF1",
     alignItems: "center",
     justifyContent: "center"
   },
   count: {
-    fontSize: 40
+    fontSize: 40,
+    color: "white"
+  },
+  buttonsContainer: {
+    marginTop: 5,
+    flexDirection: "row",
+    justifyContent: "space-around",
+    borderWidth: 1,
+    height: 35,
+    marginTop: 20,
+    borderRadius: 10,
+    borderColor: "white",
+    backgroundColor: "#79CEFE"
+  },
+  button: {
+    height: 35,
+    width: 90,
+    justifyContent: "center"
+  },
+  buttonText: {
+    textAlign: "center",
+    color: "white"
   }
 });
 
-const { container, count } = styles;
+const { container, count, button, buttonsContainer, buttonText } = styles;
